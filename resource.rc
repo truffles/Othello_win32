@@ -1,0 +1,127 @@
+
+#include "resource.h"
+#include <afxres.h>
+
+/* ICON */
+/********************************************************/
+IDI_MAINICON       ICON   "res\\icon\\othello.ico"
+/********************************************************/
+
+
+/* BITMAP */
+/********************************************************/
+IDB_BOARDTEXTURE   BITMAP "res\\bitmap\\board_texture.bmp"
+/********************************************************/
+
+
+/* MENU */
+/********************************************************/
+IDM_MAINMENU MENU
+BEGIN
+	POPUP "&Game"
+	BEGIN
+		MENUITEM "&New Game\tCtrl+N"        , IDM_GAME_NEWGAME
+		MENUITEM "&Open File\tCtrl+O"       , IDM_GAME_OPENFILE
+		MENUITEM "&Save Game\tCtrl+S"       , IDM_GAME_SAVEGAME
+		MENUITEM SEPARATOR
+		MENUITEM "&Undo Move\tCtrl+Z"       , IDM_GAME_UNDOMOVE, GRAYED
+		MENUITEM SEPARATOR
+		MENUITEM "Show Legel &Moves\tCtrl+M", IDM_GAME_SHOWLEGAL
+		MENUITEM "Se&ttings\tCtrl+T"        , IDM_GAME_SETTINGS
+		MENUITEM SEPARATOR
+		MENUITEM "E&xit\tAlt+F4"            , IDM_GAME_EXIT
+	END
+	
+	POPUP "&Help"
+	BEGIN
+		MENUITEM "&About...", IDM_HELP_ABOUT
+	END
+END
+/********************************************************/
+
+
+/* DIALOG */
+/********************************************************/
+IDD_ABOUTDLG DIALOG DISCARDABLE  150, 100, 180, 88
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Othello"
+FONT 8, "MS Shell Dlg"
+BEGIN
+	ICON           IDI_MAINICON, IDC_STATIC,     7, 33
+	PUSHBUTTON     "&OK",        IDOK,          75, 68,  50, 14
+	GROUPBOX       "",           IDC_STATIC,    37, 22, 125, 40
+	CTEXT          "Othello Version 0.8.0.2",
+	               IDC_STATIC, 46, 9, 104, 7
+	CTEXT          "Copyright (C) 2012\r\n\r\nby C. F. Lee",
+	               IDC_STATIC, 46, 31, 104, 25
+END
+
+IDD_GAMEINFODLG DIALOG 300, 50, 800, 800    // Modeless
+STYLE WS_CHILD | WS_VISIBLE
+EXSTYLE WS_EX_CLIENTEDGE
+FONT 14, "MS Shell Dlg"
+BEGIN
+	LTEXT          "2", IDT_BLACKTEXT, 40, 12, 30, 14
+	LTEXT          "2", IDT_WHITETEXT, 40, 35, 30, 14
+	LISTBOX        IDL_RECLISTBOX, 10, 60, 120, 120, WS_VSCROLL
+END
+
+IDD_GAMETYPEDLG DIALOG DISCARDABLE 0, 0, 150, 100
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION
+EXSTYLE WS_EX_TOPMOST
+CAPTION "Game Mode"
+FONT 10, "MS Shell Dlg"
+BEGIN
+	AUTORADIOBUTTON  "&Two Players", IDR_GAMETYPERADIO_0,
+	                 15, 10, 140, 14
+	AUTORADIOBUTTON  "Play with computer (&Human first)", IDR_GAMETYPERADIO_1,
+	                 15, 30, 140, 14
+	AUTORADIOBUTTON  "Play with computer (&Computer first)", IDR_GAMETYPERADIO_2,
+	                 15, 50, 140, 14
+	PUSHBUTTON       "&OK", IDOK, 50, 75, 50, 14
+END
+
+IDD_SETTINGSDLG DIALOG DISCARDABLE 100, 100, 140, 170
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Settings"
+FONT 10, "Ms Shell Dlg"
+BEGIN
+	GROUPBOX         "AI Level", IDC_STATIC,
+	                 20, 20, 100, 120
+	
+	AUTORADIOBUTTON  "BEGINNER", IDR_AILEVELRADIO_0,
+	                 30, 30, 80, 14
+	AUTORADIOBUTTON  "EASY",     IDR_AILEVELRADIO_1,
+	                 30, 45, 80, 14
+	AUTORADIOBUTTON  "NORMAL",   IDR_AILEVELRADIO_2,
+	                 30, 60, 80, 14
+	AUTORADIOBUTTON  "HARD",     IDR_AILEVELRADIO_3,
+	                 30, 75, 80, 14
+	AUTORADIOBUTTON  "ADVANCED", IDR_AILEVELRADIO_4,
+	                 30, 90, 80, 14
+	AUTORADIOBUTTON  "EXPERT",   IDR_AILEVELRADIO_5,
+	                 30, 105, 80, 14
+	AUTORADIOBUTTON  "MASTER",   IDR_AILEVELRADIO_6,
+	                 30, 120, 80, 14
+	DEFPUSHBUTTON    "&OK",      IDOK,
+	                 20, 145, 40, 14
+	PUSHBUTTON       "&Cancel",  IDCANCEL,
+	                 80, 145, 40, 14
+END
+/********************************************************/
+
+
+/* ACCELERATORS */
+/********************************************************/
+IDA_MENUACCEL ACCELERATORS
+BEGIN
+	"^N",     IDM_GAME_NEWGAME,   VIRTKEY
+	"^O",     IDM_GAME_OPENFILE,  VIRTKEY
+	"^S",     IDM_GAME_SAVEGAME,  VIRTKEY
+	"^Z",     IDM_GAME_UNDOMOVE,  VIRTKEY
+	"^M",     IDM_GAME_SHOWLEGAL, VIRTKEY
+	"^T",     IDM_GAME_SETTINGS,  VIRTKEY
+	VK_F4,    IDM_GAME_EXIT,      VIRTKEY, ALT
+END
+/********************************************************/
+
